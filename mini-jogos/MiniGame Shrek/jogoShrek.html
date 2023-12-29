@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shrek RPG</title>
+    <style>
+        @font-face {
+            font-family: 'SHREK';
+            src: url('./SHREK___.TTF') format('opentype');
+        }
+
+        ::-webkit-scrollbar {
+            height: 0;
+            width: 3px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        body{
+            margin: 0%;
+            padding: 0%;
+            box-shadow: 0;
+            overflow: hidden;
+        }
+
+        .telaInicial{
+         padding: 0%;
+        }
+
+        .telaDoJogo {
+            width: 46%;
+            height: 75vh;
+            margin-left: 27%;
+            margin-top: -80vh;
+            display: none;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 0%;
+            
+        }
+
+        .topo {
+            width: 98%;
+            height: 15%;
+            background-color: rgba(238, 222, 193, 0.5);
+            border-radius: 45px 2px 0 0;
+            z-index: 2;
+            margin-top: -9%;
+            margin-left: -2%;
+            display: flex;
+            padding-left: 5%;
+            padding-top: 2%;
+            justify-content: space-around;
+            font-family: "SHREK";
+        }
+
+        .historia {
+            width: 100%;
+            height: 79%;
+            overflow: scroll;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        .footer {
+            height: 19%;
+            width: 98%;
+            margin-left: 1%;
+            z-index: 1;
+        }
+
+        .escolhaMaquina {
+            text-align: left;
+            color: red;
+            padding: 0.7rem;
+            border-radius: 15px 15px 15px 0px;
+            margin-top: 2%;
+            width: fit-content;
+            max-width: 70%;
+            z-index: 3;
+            background-color: rgba(238, 222, 193, 0.5);
+        }
+
+        .escolhaJogador {
+            padding: 0.7rem;
+            border-radius: 15px 15px 0px 15px;
+            color: white;
+            max-width: 40%;
+            width: fit-content;
+            align-self: end;
+            z-index: 3;
+        }
+
+        /* #div_escolhaJogador{
+            background-color: green;
+        } */
+        .Shrek {
+            background-color: green;
+        }
+
+        .Gato {
+            background-color: orange;
+        }
+
+        .Burro {
+            background-color: grey;
+        }
+
+        .papiro {
+            position: absolute;
+            width: 47%;
+            height: 75vh;
+            margin-top: -8%;
+            margin-left: -1%;
+            border: 5px solid #eedec1;
+            border-radius: 45px 2px 10px 0;
+        }
+
+        .status {
+            font-size: 120%;
+
+        }
+
+        select {
+            font-family: "SHREK";
+            font-size: 110%;
+            border: none;
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        .dragao{
+            width: 100%;
+            height: 101vh;  
+            z-index: -3;    
+        }
+
+        button{
+            font-family: "SHREK";
+            border: none;
+            border-radius: 5px;
+            background-color: green;
+            padding: 1%;
+            margin: 0 2%;
+            color: white;
+        }
+
+        .botaoInicial{
+            margin-left: 45%;
+            margin-top: -20vh;
+            position: absolute;
+            padding: 1% 2%;
+            font-size: 160%;
+        }
+
+        .imagemShrek{
+            position: absolute;
+            margin-top: -105vh;
+            margin-left: 35%;
+            height: 30vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="./dragao.jpg" class="dragao" alt="">
+    <div id="div_telaInicial" class="telaInicial">
+        <img src="./shrek.jpg" class="imagemShrek" id="imagemShrek">
+        <button id="botaoInicial" class="botaoInicial" onclick="trocarTelas()">Partir</button>
+        <div id="div_telaDoJogo" class="telaDoJogo">
+            <img src="./papiro.png" class="papiro">
+            <div class="topo" id="div_topo">
+Escolha um personagem e inicie a aventura
+            </div>
+            <div class="historia" id="div_historia">
+                <div class="escolhaMaquina">
+                    Aqui você vai vivenciar uma aventura com os três principais personagens de Shrek!
+                </div>
+                <div class="escolhaMaquina" id="div_escolhaMaquina">
+                    A história começa com Shrek, um ogro mal-humorado, vivendo tranquilamente em seu pântano. Sua
+                    rotina é perturbada quando personagens de contos de fadas são exilados para seu território por
+                    Lorde Farquaad. Este último planeja se tornar rei ao casar-se com a Princesa Fiona, que está
+                    aprisionada em uma torre guardada por um Dragão. Shrek, inicialmente relutante, concorda em
+                    auxiliar Farquaad na recuperação de Fiona. Durante a jornada para o castelo, Shrek estabelece uma
+                    relação peculiar com seu companheiro burro e gato. Ao chegarem ao castelo, enfrentam desafios,
+                    incluindo a presença ameaçadora de um Dragão.
+                </div>
+                <div class="escolhaMaquina" id="div_escolhaMaquina">
+                    Escolha um personagem para enfrentar o Dragão:
+                </div>
+
+            </div>
+            <div class="footer" id="div_footer">
+
+                <select id="nomePersonagem">
+                    <option value="Shrek">Shrek</option>
+                    <option value="Gato De Botas">Gato De Botas</option>
+                    <option value="Burro">Burro</option>
+                </select>
+                <button onclick="atributosPersonagens()">Comecar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var footer = document.getElementById('div_footer');
+        var div_historia = document.getElementById('div_historia');
+        var imagemShrekVar = document.getElementById('imagemShrek');
+        var botaoInicialVar = document.getElementById('botaoInicial');
+        var telaDoJogo = document.getElementById('div_telaDoJogo');
+
+        var dragao = {
+            nome: "Elizabeth",
+            vida: 350,
+            fogoTotal: 500,
+            forca: 15,
+            danoAtaqueFogo: function () {
+                return Math.random() * ((this.forca)*2);
+            },
+        }
+
+        var personagem = {
+            vida: 0,
+            nome: "",
+            stamina: 0,
+            armamento: "",
+            danoAtaque: 0,
+            defesa: 0,
+        }
+
+        function atributosPersonagens() {
+            var nomePersonagemVar = document.getElementById('nomePersonagem').value;
+
+            if (nomePersonagemVar == "Shrek") {
+                personagem.nome = "Shrek";
+                personagem.vida = 200;
+                personagem.stamina = 40;
+                personagem.armamento = "Estilingue";
+                personagem.danoAtaque = 9;
+                personagem.defesa = 15;
+
+            } else if (nomePersonagemVar == "Gato De Botas") {
+                personagem.nome = "Gato De Botas";
+                personagem.vida = 400;
+                personagem.stamina = 120;
+                personagem.armamento = "Espada";
+                personagem.danoAtaque = 13;
+                personagem.defesa = 10;
+
+            } else {
+                personagem.nome = "Burro";
+                personagem.vida = 130;
+                personagem.stamina = 60;
+                personagem.armamento = "Soco";
+                personagem.danoAtaque = 6;
+                personagem.defesa = 10;
+                dragao.vida = dragao.vida / 2;
+                dragao.forca = dragao.forca / 2;
+            }
+            div_historia.innerHTML += `<div class="escolhaJogador ${personagem.nome}" id="div_escolhaJogador">${nomePersonagemVar}</div>`;
+            inicioDaBatalha()
+            rolarParaFinal()
+            detalhesPersonagem()
+        }
+
+        function inicioDaBatalha() {
+            footer.innerHTML = `
+            <button onclick="atacar()">Atacar</button>
+            <button onclick="defender()">Defender</button>
+        `;
+        }
+
+        function atacar() {
+            var dano = parseInt(Math.random() * personagem.danoAtaque) + 1;
+            if (personagem.stamina <= 0) {
+                div_historia.innerHTML += `<div class="escolhaJogador ${personagem.nome}" id="div_escolhaJogador">O ${personagem.nome} não tem stamina suficiente
+                    </div>`;
+                } else {
+                    personagem.stamina -= parseInt(Math.random() * dano) + 1;
+                    dragao.vida -= dano;
+                div_historia.innerHTML += `              
+                <div class="escolhaJogador ${personagem.nome}" id="div_escolhaJogador ">O ${personagem.nome} ataca o dragão e causa ${dano} de dano. Vida do dragão: ${dragao.vida} </div>`;
+            }
+            console.log(`${personagem.stamina} eeeeeee ${dragao.vida}`);
+            rolarParaFinal()
+            resultado()
+            setTimeout(decisaoDragao, 100);
+
+        }
+
+        function defender() {
+            var defesa = parseInt(Math.random() * personagem.defesa) + 1;
+            personagem.stamina += parseInt(Math.random() * 5) + 1;
+            personagem.vida += defesa;
+            div_historia.innerHTML += `
+            <div class="escolhaJogador ${personagem.nome}" id="div_escolhaJogador">O ${personagem.nome} defende e recupera stamina.</div>`;
+            console.log(`${personagem.stamina}`);
+            rolarParaFinal()
+            resultado()
+            decisaoDragao(defesa)
+
+        }
+
+        function decisaoDragao(defesa = 0) {
+            var decisao = parseInt(Math.random() * 11);
+            var danoDragao = 0;
+
+
+            if (decisao <= 6) {
+                danoDragao = parseInt(Math.random() * dragao.forca) + 1 - defesa;
+                if (defesa > danoDragao) {
+                    danoDragao = 0;
+                }
+                personagem.vida -= danoDragao;
+                div_historia.innerHTML += `
+                <div class="escolhaMaquina" id="div_escolhaMaquina">O Dragão faz um ataque físico e tira ${danoDragao} de dano</div>`;
+                console.log(`${personagem.vida}`);
+            } else {
+                danoDragao = parseInt(Math.random() * (dragao.forca + 4)) + 1 - defesa;
+                if (defesa > danoDragao) {
+                    danoDragao = 0;
+                }
+                if (danoDragao <= dragao.fogoTotal) {
+                    dragao.fogoTotal -= danoDragao;
+                    personagem.vida -= danoDragao;
+                    div_historia.innerHTML += `
+                    <div class="escolhaMaquina" id="div_escolhaMaquina">O Dragão cospi fogo e tira ${danoDragao} do seu personagem</div>`;
+                    console.log(`${personagem.vida} eeeeeee ${dragao.fogoTotal}`);
+                } else {
+                    div_historia.innerHTML += `            
+                      <div class="escolhaMaquina" id="div_escolhaMaquina">O Dragão tenta cuspir fogo, porém não consegue e não faz ataque
+                        </div>`;
+                }
+            }
+            rolarParaFinal()
+            resultado()
+            detalhesPersonagem()
+        }
+
+
+        function resultado() {
+            if (personagem.vida <= 0) {
+                div_historia.innerHTML += `            
+                <div class="escolhaMaquina" id="div_escolhaMaquina">Você perdeu</div>`;
+                footer.innerHTML = ""
+            }
+            if (dragao.vida <= 0) {
+                div_historia.innerHTML += `          
+                    <div class="escolhaMaquina" id="div_escolhaMaquina">Você venceu a ${dragao.nome}</div>`;
+                div_historia.innerHTML += `            
+                  <div class="escolhaMaquina" id="div_escolhaMaquina">Parabéns!!</div>`;
+                footer.innerHTML = "";
+                finalVitoria()
+            }
+            rolarParaFinal()
+            detalhesPersonagem()
+        }
+
+        function rolarParaFinal() {
+            div_historia.scrollTop = div_historia.scrollHeight;
+        }
+
+
+        function detalhesPersonagem() {
+            div_topo.innerHTML = `<div class="status">Nome ${personagem.nome}</div>
+            <div class="status">Vida ${personagem.vida}</div>
+            <div class="status">Stamina ${personagem.stamina}</div>`
+        }
+        function trocarTelas(){
+        imagemShrekVar.style.display= "none";
+        botaoInicial.style.display = "none";   
+        div_telaDoJogo.style.display = "flex";    
+    }
+
+    function finalVitoria(){
+        div_historia.innerHTML += `            
+                <div class="escolhaMaquina" id="div_escolhaMaquina">Ficou interresado no final???</div>`;
+        div_historia.innerHTML += `            
+                <div class="escolhaMaquina" id="div_escolhaMaquina">Então corra para um serviço de streaming para descobrir o final dessa história!</div>`;
+                footer.innerHTML = ""
+         
+    }
+    </script>
+</body>
+
+</html>
